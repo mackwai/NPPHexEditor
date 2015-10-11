@@ -1,6 +1,7 @@
 /*
 this file is part of HexEdit Plugin for Notepad++
 Copyright (C)2006 Jens Lorenz <jens.plugin.npp@gmx.de>
+Copyright (C)2015 MacKenzie Cumings <mackenzie.cumings@gmail.com>
 
 This program is free software; you can redistribute it and/or
 modify it under the terms of the GNU General Public License
@@ -511,7 +512,7 @@ void FindReplaceDlg::onReplace(void)
 			/* get selection and compare if it is equal to expected text */
 			ScintillaMsg(_hSCI, SCI_SETSELECTIONSTART, posBeg - offset, 0);
 			ScintillaMsg(_hSCI, SCI_SETSELECTIONEND, posEnd - offset, 0);
-    		ScintillaMsg(_hSCI, SCI_GETSELTEXT, 0, (LPARAM)text);
+      ScintillaGetText( _hSCI, text, posBeg - offset, (LPARAM)posEnd - offset );
 
 			/* make difference between match case modes */
     		if (((_isMatchCase == TRUE) && (memcmp(text, _find.text, lenStr) == 0)) ||
@@ -773,7 +774,7 @@ void FindReplaceDlg::getSelText(tComboInfo* info)
 	::SendMessage(_hParentHandle, HEXM_GETSEL, (WPARAM)&posBeg, (LPARAM)&posEnd);
 
 	INT	offset	= (INT)(posBeg < posEnd ? posBeg : posEnd);
-	INT	length	= (abs(posEnd-posBeg) > COMBO_STR_MAX ? COMBO_STR_MAX : abs(posEnd-posBeg));
+	INT	length	= (abs((int)posEnd-(int)posBeg) > COMBO_STR_MAX ? COMBO_STR_MAX : abs((int)posEnd-(int)posBeg));
 	info->length = length;
 
 	if (info->length != 0)
@@ -787,7 +788,7 @@ void FindReplaceDlg::getSelText(tComboInfo* info)
 				ScintillaMsg(_hSCI, SCI_SETSELECTIONSTART, posBeg - offset, 0);
 				ScintillaMsg(_hSCI, SCI_SETSELECTIONEND, posEnd - offset, 0);
 				ScintillaMsg(_hSCI, SCI_TARGETFROMSELECTION, 0, 0);
-				ScintillaMsg(_hSCI, SCI_GETSELTEXT, 0, (LPARAM)text);
+        ScintillaGetText( _hSCI, text, posBeg - offset, (LPARAM)posEnd - offset );
 
 				/* encode the text in dependency of selected data type */
 				memcpy(info->text, text, info->length);

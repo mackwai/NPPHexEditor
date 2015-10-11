@@ -57,19 +57,19 @@ EXSTYLE WS_EX_TOOLWINDOW
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     DEFPUSHBUTTON   "Ok",IDOK,93,199,50,14
-    LTEXT           "jens.plugin.npp@gmx.de",IDC_EMAIL_LINK,65,41,80,9
+    LTEXT           "mackenzie.cumings@gmail.com",IDC_EMAIL_LINK,65,41,105,9
     LTEXT           "Author:",IDC_STATIC_AUTHOR,12,31,51,9
     GROUPBOX        "Menu entries",IDC_STATIC_MENU,7,99,216,95
     LTEXT           "eMail:",IDC_STATIC_EMAIL,12,41,21,9
-    CTEXT           "At first, I would like to thank Don for his great program and his support to create this plugin. Also I would like to thank Vitaliy and\nRichard Mant for their support.",
+    CTEXT           "For info on alt hex digits, see mackwai.blogspot.com",
                     IDC_STATIC_THX,7,67,216,25
-    CTEXT           "HEX-Editor Plugin for Notepad++ v5.4                         v0.9.5",
+    CTEXT           "HEX-Editor Plugin for Notepad++ v6.8.3                      v10.0.0",
                     IDC_STATIC,7,7,216,17,SS_CENTERIMAGE,WS_EX_DLGMODALFRAME | 
                     WS_EX_TRANSPARENT
-    LTEXT           "http://sourceforge.net/projects/npp-plugins",
+    LTEXT           "https://github.com/mackwai/NPPHexEditor",
                     IDC_NPP_PLUGINS_URL,65,52,158,9
     LTEXT           "URL:",IDC_STATIC,12,52,21,9
-    LTEXT           "Jens Lorenz",IDC_STATIC,65,31,39,8
+    LTEXT           "MacKenzie Cumings",IDC_STATIC,65,31,80,8
     LTEXT           "View in HEX\t\tSwaps between Hex and ANSI view.",
                     IDC_STATIC_HELP_0,15,109,200,8
     LTEXT           "Compare HEX\t\tCompares two files and marks the\n\t\t\tdifference.",
@@ -86,7 +86,7 @@ BEGIN
                     15,181,200,10
 END
 
-IDD_OPTION_DLG DIALOGEX 0, 0, 225, 142
+IDD_OPTION_DLG DIALOGEX 0, 0, 225, 164
 STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | 
     WS_SYSMENU
 EXSTYLE WS_EX_TOOLWINDOW
@@ -94,7 +94,7 @@ CAPTION "Hex-Editor Options"
 FONT 8, "MS Shell Dlg", 0, 0, 0x1
 BEGIN
     CONTROL         "Tab1",IDC_TAB_PROP,"SysTabControl32",TCS_MULTILINE | 
-                    WS_TABSTOP,7,7,211,109
+                    WS_TABSTOP,7,7,211,131
     CONTROL         "8-Bit",IDC_RADIO_8,"Button",BS_AUTORADIOBUTTON | 
                     BS_NOTIFY | WS_GROUP | WS_TABSTOP,19,30,30,10,
                     WS_EX_TRANSPARENT
@@ -109,19 +109,26 @@ BEGIN
                     WS_EX_TRANSPARENT
     CONTROL         "Binary",IDC_RADIO_BIN,"Button",BS_AUTORADIOBUTTON | 
                     BS_NOTIFY | WS_TABSTOP,79,41,66,10,WS_EX_TRANSPARENT
+    CONTROL         "Alt hex digits 1",IDC_RADIO_MDIGITS,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_TABSTOP,79,52,66,10,WS_EX_TRANSPARENT
+    CONTROL         "Alt hex ligatures 1",IDC_RADIO_MLIGATURES,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_TABSTOP,79,63,72,10,WS_EX_TRANSPARENT
+    CONTROL         "Alt hex digits 2",IDC_RADIO_SDIGITS,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_TABSTOP,79,74,66,10,WS_EX_TRANSPARENT
+    CONTROL         "Alt hex ligatures 2",IDC_RADIO_SLIGATURES,"Button",BS_AUTORADIOBUTTON | 
+                    BS_NOTIFY | WS_TABSTOP,79,85,72,10,WS_EX_TRANSPARENT
     CONTROL         "Big-Endian",IDC_RADIO_BIG,"Button",BS_AUTORADIOBUTTON | 
                     BS_NOTIFY | WS_GROUP | WS_TABSTOP,153,30,50,10,
                     WS_EX_TRANSPARENT
     CONTROL         "Little-Endian",IDC_RADIO_LITTLE,"Button",
                     BS_AUTORADIOBUTTON | BS_NOTIFY | WS_TABSTOP,153,41,55,10,
                     WS_EX_TRANSPARENT
-    LTEXT           "Column Count:",IDC_STATIC_COLUMN,98,64,56,8,SS_NOTIFY,
+    LTEXT           "Column Count:",IDC_STATIC_COLUMN,98,106,56,8,SS_NOTIFY,
                     WS_EX_TRANSPARENT
-    EDITTEXT        IDC_COLUMN_EDIT,162,62,38,12,ES_CENTER | ES_AUTOHSCROLL
-    LTEXT           "Address Width:",IDC_STATIC_ADDWIDTH,98,80,56,8,
+    EDITTEXT        IDC_COLUMN_EDIT,162,104,38,12,ES_CENTER | ES_AUTOHSCROLL
+    LTEXT           "Address Width:",IDC_STATIC_ADDWIDTH,98,122,56,8,
                     SS_NOTIFY,WS_EX_TRANSPARENT
-    EDITTEXT        IDC_ADDWIDTH_EDIT,162,78,38,12,ES_CENTER | 
-                    ES_AUTOHSCROLL
+    EDITTEXT        IDC_ADDWIDTH_EDIT,162,120,38,12,ES_CENTER | ES_AUTOHSCROLL
     LTEXT           "Extensions:                                              e.g.: .dat .exe",
                     IDC_STATIC_EXAMPLE,22,35,180,8
     EDITTEXT        IDC_EDIT_EXTLIST,22,44,180,12,ES_AUTOHSCROLL
@@ -171,8 +178,8 @@ BEGIN
     LTEXT           "Current Line:",IDC_STATIC_CURLINE,17,100,100,10
     COMBOBOX        IDC_COMBO_CURLINE,170,98,40,30,CBS_DROPDOWNLIST | 
                     WS_VSCROLL | WS_TABSTOP
-    DEFPUSHBUTTON   "Ok",IDOK,110,121,50,14
-    PUSHBUTTON      "Cancel",IDCANCEL,168,121,50,14
+    DEFPUSHBUTTON   "Ok",IDOK,110,143,50,14
+    PUSHBUTTON      "Cancel",IDCANCEL,168,143,50,14
 END
 
 IDD_COLOR_POPUP DIALOGEX 0, 0, 132, 113
@@ -402,15 +409,15 @@ BEGIN
     BEGIN
         BLOCK "040704b0"
         BEGIN
-            VALUE "Comments", "Visit: http://sourceforge.net/projects/npp-plugins"
-            VALUE "CompanyName", "jens.plugin.npp@gmx.de"
+            VALUE "Comments", "Visit: https://github.com/mackwai/NPPHexEditor"
+            VALUE "CompanyName", "mackenzie.cumings@gmail.com"
             VALUE "FileDescription", "Notepad++ Plugin : a free (GNU) source code hex editor"
-            VALUE "FileVersion", "0.9.5"
+            VALUE "FileVersion", "10.0.0"
             VALUE "InternalName", "HexEditor for npp.exe"
-            VALUE "LegalCopyright", "Copyright 2006-2008 by Jens Lorenz"
+            VALUE "LegalCopyright", "Copyright 2006-2008 by Jens Lorenz, 2015 MacKenzie Cumings"
             VALUE "OriginalFilename", "HexEditor.dll"
             VALUE "ProductName", "Hex Edit Plugin"
-            VALUE "ProductVersion", "0.9.5"
+            VALUE "ProductVersion", "10.0.0"
             VALUE "SpecialBuild", "UNICODE"
         END
     END
@@ -442,3 +449,5 @@ IDB_TB_HEX              BITMAP                  "..\\res\\hex.bmp"
 /////////////////////////////////////////////////////////////////////////////
 #endif    // not APSTUDIO_INVOKED
 
+IDR_MFONT1 TTFONT_FILE "../res/xDigitsClock.ttf"
+IDR_MFONT2 TTFONT_FILE "../res/xDigitsSans.ttf"

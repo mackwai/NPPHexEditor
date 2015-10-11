@@ -21,8 +21,8 @@
 
 void HelpDlg::doDialog()
 {
-    if (!isCreated())
-        create(IDD_HELP_DLG);
+  if ( !isCreated() )
+    create(IDD_HELP_DLG);
 
 	goToCenter();
 }
@@ -32,13 +32,16 @@ BOOL CALLBACK HelpDlg::run_dlgProc(HWND hwnd, UINT Message, WPARAM wParam, LPARA
 {
 	switch (Message) 
 	{
-        case WM_INITDIALOG :
+    case WM_INITDIALOG :
 		{
-            _emailLink.init(_hInst, _hSelf);
-            _emailLink.create(::GetDlgItem(_hSelf, IDC_EMAIL_LINK), _T("mailto:jens.plugin.npp@gmx.de"));
+      _emailLink.init(_hInst, _hSelf);
+      _emailLink.create(::GetDlgItem(_hSelf, IDC_EMAIL_LINK), _T("mailto:mackenzie.cumings@gmail.com"));
 
-            _urlNppPlugins.init(_hInst, _hSelf);
-            _urlNppPlugins.create(::GetDlgItem(_hSelf, IDC_NPP_PLUGINS_URL), _T("http://sourceforge.net/projects/npp-plugins/"));
+      _urlNppPlugins.init(_hInst, _hSelf);
+      _urlNppPlugins.create(::GetDlgItem(_hSelf, IDC_NPP_PLUGINS_URL), _T("https://github.com/mackwai/NPPHexEditor"));
+
+      _urlAltHexDigits.init(_hInst, _hSelf);
+      _urlAltHexDigits.create(::GetDlgItem(_hSelf, IDC_STATIC_THX), _T("http://mackwai.blogspot.com/2015/06/alternative-hexadecimal-digits-version-2.html"));
 
 			/* change language */
 			NLChangeDialog(_hInst, _nppData._nppHandle, _hSelf, _T("Help"));

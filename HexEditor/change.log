@@ -2,6 +2,13 @@
 Change-log for HexEditor.dll
 
 ------------------------------------------------------------------------------------
+15/10/11  v10.0.0 :
+  Fix: Fixed bugs 182, 241, 266 from Sourceforge (http://sourceforge.net/p/npp-plugins/bugs/)
+  New: Display file contents in alternative hex digits.
+  New: Rehosted source code on Github.
+------------------------------------------------------------------------------------
+
+------------------------------------------------------------------------------------
 09/09/09  v0.9.5 :
 ------------------------------------------------------------------------------------
 	Fix: Menu of Npp++ isn't displayed properly after using hex [NPP-P-B-2799622]

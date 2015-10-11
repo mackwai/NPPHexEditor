@@ -41,8 +41,8 @@ public:
    	void doDialog();
 
     virtual void destroy() {
-        _emailLink.destroy();
-		_urlNppPlugins.destroy();
+      _emailLink.destroy();
+		  _urlAltHexDigits.destroy();
     };
 
 
@@ -52,11 +52,12 @@ protected :
 private:
 	/* Handles */
 	NppData			_nppData;
-    HWND			_HSource;
+  HWND			_HSource;
 	
 	/* for eMail */
-    URLCtrl			_emailLink;
+  URLCtrl			_emailLink;
 	URLCtrl			_urlNppPlugins;
+  URLCtrl			_urlAltHexDigits;
 };
 
 

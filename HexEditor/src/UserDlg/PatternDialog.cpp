@@ -299,8 +299,8 @@ BOOL PatternDlg::onReplace(void)
 	else
 	{
 		/* get horizontal and vertical gap size */
-		length = abs(prop.anchorPos - prop.cursorPos);
-		lines = abs(prop.anchorItem - prop.cursorItem);
+		length = abs((int)prop.anchorPos - (int)prop.cursorPos);
+		lines = abs((int)prop.anchorItem - (int)prop.cursorItem);
 
 		/* create pattern */
 		INT	patSize = 0;

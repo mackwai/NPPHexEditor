@@ -1,5 +1,6 @@
 //this file is part of Hex Edit Plugin for Notepad++
 //Copyright (C)2006 Jens Lorenz <jens.plugin.npp@gmx.de>
+//Copyright (C)2015 MacKenzie Cumings <mackenzie.cumings@gmail.com>
 //
 //This program is free software; you can redistribute it and/or
 //modify it under the terms of the GNU General Public License
@@ -40,10 +41,11 @@ using namespace std;
 
 #define DT_HEX_VIEW			(DT_SINGLELINE | DT_VCENTER | DT_END_ELLIPSIS | DT_NOPREFIX)
 #define	VIEW_ROW			(_pCurProp->columns * _pCurProp->bits)
-#define FACTOR				((_pCurProp->isBin == TRUE)?8:2)
+#define FACTOR				((_pCurProp->isBin == SHOW_BINARY)?8:((_pCurProp->isBin == SHOW_MNEMONIC_LIGATURES||_pCurProp->isBin == SHOW_SLANTED_LIGATURES)?1:2))
 #define	SUBITEM_LENGTH		(_pCurProp->bits * FACTOR)
 #define FULL_SUBITEM		((_pCurProp->cursorItem * VIEW_ROW + (_pCurProp->cursorSubItem * _pCurProp->bits)) <= _currLength)
 #define DUMP_FIELD			(_pCurProp->columns + 1)
+#define SHOWING_MNEMONIC_CHARACTERS ( _pCurProp->isBin != SHOW_HEX && _pCurProp->isBin != SHOW_BINARY )
 
 extern tClipboard	g_clipboard;
 
@@ -337,8 +339,11 @@ protected :
 
 private:
 	void UpdateHeader(BOOL isFirstTime = FALSE);
-	void ReadArrayToList(LPSTR text,INT iItem, INT iSubItem);
-	void AddressConvert(LPSTR text, INT length);
+	void ReadAddressFromItem( WCHAR* wText, INT iItem );
+  void ReadHexFromItem( WCHAR* wText, INT iItem, INT iSubItem );
+  void ReadDumpFromItem( WCHAR* wText, INT iItem );
+
+	void AddressConvert( LPSTR text, INT length, WCHAR* result );
 	void DumpConvert(LPSTR text, UINT length);
 	void BinHexConvert(LPSTR text, INT length);
 	void MoveView(void);
@@ -414,19 +419,42 @@ private:
 		BOOL	ret			= FALSE;
 		HDC		hDc			= ::GetDC(_hSelf);
 		INT		zoomFactor	= 0;
+    LPCTSTR fontName = _T("");
 
 		if (_hFont) {
 			::DeleteObject(_hFont);
 		}
 
-		if (_pCurProp != NULL) {
+		if (_pCurProp != NULL)
+    {
 			zoomFactor = _pCurProp->fontZoom;
+
+      // Use a special font which has mnemonic characters defined at certain unicode code points, if needed.
+#ifdef UNICODE
+      switch ( _pCurProp->isBin )
+      {
+        case SHOW_MNEMONIC_DIGITS:
+        case SHOW_MNEMONIC_LIGATURES:
+          fontName = _T("xDigitsClock");
+          break;
+        case SHOW_SLANTED_DIGITS:
+        case SHOW_SLANTED_LIGATURES:
+          fontName = _T("xDigitsSans");
+          break;
+        default:
+          getFontName();
+          break;
+      }
+#else
+      fontName = getFontName();
+#endif
 		}
 
-		if (hDc != NULL) {
+		if (hDc != NULL)
+    {
 			_hFont = ::CreateFont(-MulDiv(g_iFontSize[_fontSize], GetDeviceCaps(hDc, LOGPIXELSY), 72) - zoomFactor, 0, 0, 0,
 				(isFontBold() == TRUE) ? FW_BOLD : FW_NORMAL, isFontItalic(), isFontUnderline(),
-				0, ANSI_CHARSET, OUT_TT_ONLY_PRECIS, 0, ANTIALIASED_QUALITY, FIXED_PITCH | FF_MODERN, getFontName());
+				0, ANSI_CHARSET, OUT_TT_ONLY_PRECIS, 0, ANTIALIASED_QUALITY, FIXED_PITCH | FF_MODERN, fontName);
 			if (_hFont)
 			{
 				::SendMessage(_hListCtrl, WM_SETFONT, reinterpret_cast<WPARAM>(_hFont), 0);

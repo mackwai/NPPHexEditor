@@ -1,5 +1,6 @@
 //this file is part of Hex Edit Plugin for Notepad++
 //Copyright (C)2006 Jens Lorenz <jens.plugin.npp@gmx.de>
+//Copyright (C)2015 MacKenzie Cumings <mackenzie.cumings@gmail.com>
 //
 //This program is free software; you can redistribute it and/or
 //modify it under the terms of the GNU General Public License
@@ -73,6 +74,13 @@ const TCHAR COMPARE_PATH[]	= _T("\\Compare");
 #define HEX_WORD		2
 #define HEX_DWORD		4
 #define HEX_LONG		8
+
+#define SHOW_HEX 0
+#define SHOW_BINARY 1
+#define SHOW_MNEMONIC_DIGITS 2
+#define SHOW_MNEMONIC_LIGATURES 3
+#define SHOW_SLANTED_DIGITS 4
+#define SHOW_SLANTED_LIGATURES 5
 
 #define MAX_PATH_UNICODE 780
 
@@ -169,7 +177,7 @@ typedef struct tHexProp
 	UINT				addWidth;				// char width of address field
 	SHORT				columns;				// number of columns
 	SHORT				bits;					// number of bits used
-	BOOL				isBin;					// shows in binary
+	INT 				isBin;					// decoding
 	BOOL				isLittle;				// shows in little endian
 	eEdit				editType;				// edit in hex or in ascii
 	UINT				firstVisRow;			// last selected scroll position

@@ -1,5 +1,6 @@
 //this file is part of Hex Edit Plugin for Notepad++
 //Copyright (C)2006 Jens Lorenz <jens.plugin.npp@gmx.de>
+//Copyright (C)2015 MacKenzie Cumings <mackenzie.cumings@gmail.com>
 //
 //This program is free software; you can redistribute it and/or
 //modify it under the terms of the GNU General Public License
@@ -72,6 +73,10 @@
 	#define IDC_CHECK_FOCUSRC					(IDD_OPTION_DLG + 39)
     #define IDC_STATIC_CURLINE	    		    (IDD_OPTION_DLG + 40)
     #define IDC_COMBO_CURLINE 	    		    (IDD_OPTION_DLG + 41)
+    #define IDC_RADIO_MDIGITS 	    		    (IDD_OPTION_DLG + 42)
+    #define IDC_RADIO_MLIGATURES 	    		  (IDD_OPTION_DLG + 43)
+    #define IDC_RADIO_SDIGITS 	    		    (IDD_OPTION_DLG + 44)
+    #define IDC_RADIO_SLIGATURES 	    		  (IDD_OPTION_DLG + 45)
 
 #define    IDD_GOTO_DLG          20300
     #define IDC_EDIT_GOTO                       (IDD_GOTO_DLG + 1)
@@ -177,5 +182,8 @@
 	#define	IDC_NP_KEY_SELECT_2_HOME			(IDCMD+8)
 	#define	IDC_NP_KEY_SELECT_2_END				(IDCMD+9)
 
-    
+#define IDR_MFONT1 101
+#define IDR_MFONT2 102
+#define TTFONT_FILE 256
+
 #endif // HEXEDITOR_RC_H
