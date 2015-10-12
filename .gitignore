@@ -1,0 +1,13 @@
+*.sdf
+*.suo
+*.tlog
+*.obj
+*.user
+HexEditor/projects/2003/Release/HEXDialog.res
+*.manifest
+*.lib
+HexEditor/projects/2003/Release/HexEditor.log
+*.pdb
+*.exp
+*.cache
+*.lastbuildstate
