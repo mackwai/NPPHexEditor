@@ -442,7 +442,7 @@ private:
           fontName = _T("xDigitsSans");
           break;
         default:
-          getFontName();
+          fontName = getFontName();
           break;
       }
 #else

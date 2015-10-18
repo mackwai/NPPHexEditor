@@ -89,7 +89,7 @@ HGLOBAL StaticDialog::makeRTLResource(int dialogID, DLGTEMPLATE **ppMyDlgTemplat
 	return hMyDlgTemplate;
 }
 
-void StaticDialog::create(int dialogID, bool isRTL, bool isModeles)
+void StaticDialog::create(int dialogID, bool isRTL, bool isModeless)
 {
 	if (isRTL)
 	{
@@ -107,8 +107,8 @@ void StaticDialog::create(int dialogID, bool isRTL, bool isModeles)
 		throw int(666);
 	}
 
-	if (isModeles) {
-		_isModeles = isModeles;
+	if (isModeless) {
+		_isModeles = isModeless;
 		::SendMessage(_hParent, NPPM_MODELESSDIALOG, MODELESSDIALOGADD, (WPARAM)_hSelf);
 	}
 }

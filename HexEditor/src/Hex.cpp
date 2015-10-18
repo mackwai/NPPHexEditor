@@ -159,8 +159,16 @@ void InstallFontResource( int resourceName, const wchar_t* fontFilePath )
 // Usage example
 void InstallFontForMnemonicCharacters()
 {
-  InstallFontResource( IDR_MFONT1, _T("C:\\Windows\\Fonts\\xDigitsClock.ttf") );
-  InstallFontResource( IDR_MFONT2, _T("C:\\Windows\\Fonts\\xDigitsSans.ttf") );
+  TCHAR pathToTempFolder[ MAX_PATH + 1 ];
+  GetTempPath( MAX_PATH + 1, pathToTempFolder );
+
+  TCHAR pathToFontFile[ MAX_PATH + 1 ];
+
+  PathCombine( pathToFontFile, pathToTempFolder, _T("xDigitsClock.ttf") );
+  InstallFontResource( IDR_MFONT1, pathToFontFile );
+
+  PathCombine( pathToFontFile, pathToTempFolder, _T("xDigitsSans.ttf") );
+  InstallFontResource( IDR_MFONT2, pathToFontFile );
 }
 
 BOOL APIENTRY DllMain( HANDLE hModule, 
@@ -1088,6 +1096,7 @@ void SystemUpdate(void)
   TCHAR		pszNewPath[MAX_PATH];
 
   /* update open files */
+  // TODO: Debug here?
   UpdateCurrentHScintilla();
   ::SendMessage(nppData._nppHandle, NPPM_GETFULLCURRENTPATH, 0, (LPARAM)pszNewPath);
   INT newOpenDoc1 = (INT)::SendMessage(nppData._nppHandle, NPPM_GETCURRENTDOCINDEX, 0, MAIN_VIEW);
@@ -1189,6 +1198,7 @@ void DialogUpdate(void)
   }
 
   /* find replace dialog change */
+  /* dEBUG HERE. */
   if ((pCurHexEdit->isVisible() == false) && (findRepDlg.isVisible() == true))
   {
     findRepDlg.display(FALSE);
